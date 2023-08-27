@@ -7,6 +7,10 @@
 #include "AudioTools/Buffers.h"
 #include "AudioBasic/Str.h"
 
+// extern String UDPToken;
+extern char UDPHead[];
+extern uint8_t UDPHeadLength;
+
 /**
  * @defgroup communications Communications
  * @ingroup main
@@ -566,6 +570,8 @@ namespace audio_tools
     {
       TRACED();
       beginPacket(remoteIP(), remotePort());
+      // Token:32字节 + 数据类型:1字节
+      WiFiUDP::write((uint8_t *)UDPHead, 33);
       size_t result = WiFiUDP::write(buffer, size);
       endPacket();
       return result;
