@@ -571,7 +571,7 @@ namespace audio_tools
       TRACED();
       beginPacket(remoteIP(), remotePort());
       // Token:32字节 + 数据类型:1字节
-      WiFiUDP::write((uint8_t *)UDPHead, 33);
+      WiFiUDP::write((uint8_t *)UDPHead, UDPHeadLength);
       size_t result = WiFiUDP::write(buffer, size);
       endPacket();
       return result;
